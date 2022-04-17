@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+    <!-- move styles to css file -->
+    <link rel="stylesheet" href="demostyles.css">
+    <title>Hattrick.js</title>
+</head>
+<script type="text/javascript" src="hattrick.js"></script>
+
+<body>
+    <h1>Hattrick.js</h1>
+    <div class="about">
+        <h2>About</h2>
+        <p>Hattrick.js is a frontend JavaScript library used for visualizing soccer plays using data/coordinate points. Its
+            primary uses are to visualize a soccer play
+            (i.e. a specific set of passes between players) and the details of that play. There is also an option to
+            generate scouting reports for players being
+            visualized.
+        </p>
+    </div>
+
+    <div class="about">
+        <h2>API Documentation</h2>
+        <p><a href="./Hattrick.html">Link to documentation</a></p>
+        <h5>Getting Started</h5>
+        <p>
+            In order to use Hattrick.js, users must create a script tag in the head of their HTML file like so:
+        </p>
+        If the user has the hattrick.js file containing the API saved locally:
+        <div class="snip">
+            <code>
+        &lt;script type="text/javascript" src="hattrick.js"&gt;&lt;/script&gt;
+        </code>
+        </div>
+        Otherwise, the following code can be used:
+        <div class="snip">
+            <code>
+        &lt;script type="text/javascript" src="/link-tmp.js"&gt;&lt;/script&gt;
+        </code>
+        </div>
+        <p>Inside the HTML body of any file where the script above was added in the HTML head, the following code can be
+            used within script tags to instantiate a Hattrick object so that the API methods can be called. Alternatively, users
+            can include a reference to Hattrick.js in external javascript files.
+        </p>
+        <div class="snip">
+            <code>
+        const hattrick = new Hattrick();
+        hattrick.newBlankPlayCanvas("Ted Lasso Scoring Special", "#38b000", 1000, 550);
+        </code>
+        </div>
+        <p>In the above snippet, we made a call to the newBlankPlayCanvas method, but the user may call any of the API
+            methods using the hattrick object.</p>
+    </div>
+
+    <div class="about">
+        <h2>Examples</h2>
+    </div>
+    <h5>Creating and Setting Up Blank Play Canvases</h5>
+    <p><b>Plain color canvas:</b></p>
+    <p>Code:</p>
+    <div class="snip">
+        <code>
+        const h = new Hattrick();
+        h.newBlankPlayCanvas("Play-23", "#70e000", 1000, 550);
+        </code>
+    </div>
+    <p>Output:</p>
+    <script>
+        const hat1 = new Hattrick();
+        hat1.newBlankPlayCanvas("Play-23", "#70e000", 700, 370);
+    </script>
+
+    <p><b>Custom image background canvas:</b></p>
+    <p>Code:</p>
+    <div class="snip">
+        <code>
+        const img1 = "https://d1qq9lwf5ow8iz.cloudfront.net/live-images-1/ImageDetail_9cdadc65-6ad4-4531-8c78-3ffd21725bfc_Large";
+        const hat2 = new Hattrick();
+        hat2.newCustomPlayCanvas("Custom Canvas 3", img1, 700, 370);
+        </code>
+    </div>
+    <p>Output:</p>
+    <script>
+        const img1 = "https://d1qq9lwf5ow8iz.cloudfront.net/live-images-1/ImageDetail_9cdadc65-6ad4-4531-8c78-3ffd21725bfc_Large";
+        const hat2 = new Hattrick();
+        hat2.newCustomPlayCanvas("Custom Canvas 3", img1, 700, 370);
+    </script>
+
+    <h5>Drawing Up Plays On Canvas</h5>
+    <p><b>Using Generic Markers to Represent Players</b></p>
+    <p>Code:</p>
+    <div class="snip">
+        <code>
+        const hat = new Hattrick();
+        hat.newBlankPlayCanvas("Ted Lasso Scoring Special", "#38b000", 1000, 550);
+        coordsArray = ["50,30", "200,120", "150,300", "500,200", "920,200", "700,500"];
+        hat.drawPlayerUsingCoordsOnly("TedLassoScoringSpecial", coordsArray);
+        passArray = ["50,30", "200,120","700,500","150,300", "500,200","7,265"];
+        hat.drawNPlayerPassWithCoords("TedLassoScoringSpecial", passArray);
+    </code>
+    </div>
+    <p>Output:</p>
+    <script>
+        const hat3 = new Hattrick();
+        hat3.newBlankPlayCanvas("Ted Lasso Scoring Special", "#38b000", 1000, 550);
+        coordsArray = ["50,30", "200,120", "150,300", "500,200", "920,200", "700,500"];
+        hat3.drawPlayerUsingCoordsOnly("TedLassoScoringSpecial", coordsArray);
+        passArray = ["50,30", "200,120", "700,500", "150,300", "500,200", "7,265"];
+        hat3.drawNPlayerPassWithCoords("TedLassoScoringSpecial", passArray);
+    </script>
+
+    <p><b>Using Image Markers to Represent Players</b></p>
+    <p>Code:</p>
+    <div class="snip">
+        <code>
+        const hat = new Hattrick();
+        const soccerBackground = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Soccer_field_-_empty.svg/2560px-Soccer_field_-_empty.svg.png"
+        hat.newCustomPlayCanvas("Play with custom background", soccerBackground, 1000, 550);
+        const pnames = ["Mbappe", "Messi", "Neymar"];
+        const imgs = ["img1.jpg",
+            "img2.jpg",
+            "img3.jpg"
+        ];
+        const tname = "Paris Saint-Germain F.C.";
+        const heights = [1.83, 2.03, 1.72];
+        const gpgs = [2.1, 3.4, 3.0];
+        const apgs = [4.2, 4.5, 2.4];
+        const sogs = [15, 12, 11];
+        const pCoordsArr = ["110,50", "400,200", "200,300"];
+        const playerArray = hat.generatePlayerStructArray(pnames, imgs, tname, heights, gpgs, apgs, sogs, pCoordsArr);
+        hat.drawPlayersUsingObjects("Playwithcustombackground", playerArray);
+        hat.drawNPlayerPassWithCoordsCustom("Playwithcustombackground", soccerBackground, 1000, 550, pCoordsArr, playerArray);
+    </code>
+    </div>
+    <p>Output:</p>
+    <p>Disclaimer: May need to refresh page if images do not load onto canvas on first try (based on image resolution)
+    </p>
+    <script>
+        const hat6 = new Hattrick();
+        const soccerBackground1 = "https://d1qq9lwf5ow8iz.cloudfront.net/live-images-1/ImageDetail_9cdadc65-6ad4-4531-8c78-3ffd21725bfc_Large";
+        hat6.newCustomPlayCanvas("PSG Set 3", soccerBackground1, 1000, 550);
+
+        const pnames1 = ["Mbappe", "Messi", "Neymar"];
+        const imgs1 = ["https://i0.wp.com/www.mocamboo.com/wp-content/uploads/2021/08/avatar-1630123917c2p40.jpg?resize=300%2C300&ssl=1",
+            "https://imageio.forbes.com/specials-images/imageserve/5ec595d45f39760007b05c07/0x0.jpg?format=jpg&crop=1491,1490,x989,y74,safe&height=416&width=416&fit=bounds",
+            "https://www.planetsport.com/image-library/square/500/n/neymarjrnov20.jpg"
+        ];
+        const tname1 = "Paris Saint-Germain F.C.";
+        const heights1 = [1.83, 2.03, 1.72];
+        const gpgs1 = [2.1, 3.4, 3.0];
+        const apgs1 = [4.2, 4.5, 2.4];
+        const sogs1 = [15, 12, 11];
+        const pCoordsArr1 = ["200,400", "100,100", "650,300"];
+        const playerArray1 = hat6.generatePlayerStructArray(pnames1, imgs1, tname1, heights1, gpgs1, apgs1, sogs1, pCoordsArr1);
+        hat6.drawPlayersUsingObjects("PSGSet3", playerArray1);
+        hat6.drawNPlayerPassWithCoordsCustom("PSGSet3", soccerBackground1, 1000, 550, pCoordsArr1, playerArray1);
+    </script>
+
+    <p>Another example</p>
+    <p>Code:</p>
+    <div class="snip">
+    <code>
+        const hat6 = new Hattrick();
+        const soccerBackground1 = "https://d1qq9lwf5ow8iz.cloudfront.net/live-images-1/ImageDetail_9cdadc65-6ad4-4531-8c78-3ffd21725bfc_Large";
+        hat6.newCustomPlayCanvas("PSG Set 3", soccerBackground1, 1000, 550);
+
+        const pnames1 = ["Mbappe", "Messi", "Neymar"];
+        const imgs1 = ["img1.jpg",
+        "img2.jpg",
+        "img3.jpg"
+        ];
+        const tname1 = "Paris Saint-Germain F.C.";
+        const heights1 = [1.83, 2.03, 1.72];
+        const gpgs1 = [2.1, 3.4, 3.0];
+        const apgs1 = [4.2, 4.5, 2.4];
+        const sogs1 = [15, 12, 11];
+        const pCoordsArr1 = ["200,400", "100,100", "650,300"];
+        const playerArray1 = hat6.generatePlayerStructArray(pnames1, imgs1, tname1, heights1, gpgs1, apgs1, sogs1, pCoordsArr1);
+        hat6.drawPlayersUsingObjects("PSGSet3", playerArray1);
+        hat6.drawNPlayerPassWithCoordsCustom("PSGSet3", soccerBackground1, 1000, 550, pCoordsArr1, playerArray1);
+    </code>
+</div>
+    <p>Output:</p>
+    <script>
+        const hat7 = new Hattrick();
+        const soccerBackground = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Soccer_field_-_empty.svg/2560px-Soccer_field_-_empty.svg.png"
+        hat6.newCustomPlayCanvas("PSG Set 5", soccerBackground, 1000, 550);
+
+        const pnames = ["Mbappe", "Messi", "Neymar"];
+        const imgs = ["https://i0.wp.com/www.mocamboo.com/wp-content/uploads/2021/08/avatar-1630123917c2p40.jpg?resize=300%2C300&ssl=1",
+            "https://imageio.forbes.com/specials-images/imageserve/5ec595d45f39760007b05c07/0x0.jpg?format=jpg&crop=1491,1490,x989,y74,safe&height=416&width=416&fit=bounds",
+            "https://www.planetsport.com/image-library/square/500/n/neymarjrnov20.jpg"
+        ];
+        const tname = "Paris Saint-Germain F.C.";
+        const heights = [1.83, 2.03, 1.72];
+        const gpgs = [2.1, 3.4, 3.0];
+        const apgs = [4.2, 4.5, 2.4];
+        const sogs = [15, 12, 11];
+        const pCoordsArr = ["110,50", "400,200", "200,300"];
+        const playerArray = hat7.generatePlayerStructArray(pnames, imgs, tname, heights, gpgs, apgs, sogs, pCoordsArr);
+        hat7.drawPlayersUsingObjects("PSGSet5", playerArray);
+        hat7.drawNPlayerPassWithCoordsCustom("PSGSet5", soccerBackground, 1000, 550, pCoordsArr, playerArray);
+    </script>
+
+
+    <h5>Including Play Information and Other Information Below A Play Diagram</h5>
+    <p><b>Displaying pass information and player involved in play</b></p>
+    <div class="snip">
+        <code>
+        const hat = new Hattrick();
+        hat.newCustomPlayCanvas("Testing named passes", soccerBackground, 1000, 550);
+        hat.drawPlayersUsingObjects("Testingnamedpasses", playerArray);
+        hat.drawNPlayerPassWithNames("Testingnamedpasses", true, soccerBackground, playerArray, ["Messi", "Neymar", "Mbappe"]);
+        hat.displayPlayInfoAndStats("Testingnamedpasses", playerArray, ["Messi", "Neymar", "Mbappe"]);
+        </code>
+    </div>
+    <p>Output:</p>
+    <script>
+        const hat = new Hattrick();
+        hat.newCustomPlayCanvas("Testing named passes", soccerBackground, 1000, 550);
+        hat.drawPlayersUsingObjects("Testingnamedpasses", playerArray);
+        hat.drawNPlayerPassWithNames("Testingnamedpasses", true, soccerBackground, playerArray, ["Messi", "Neymar", "Mbappe"]);
+
+        hat.displayPlayInfoAndStats("Testingnamedpasses", playerArray, ["Messi", "Neymar", "Mbappe"]);
+    </script>
+
+<h5>Generating a Scouting Report for a Team</h5>
+    <p>Code:</p>
+    <div class="snip">
+        <code>
+        hat.generateTeamScoutingReport(playerArray);
+        </code>
+    </div>
+    <p>Output:</p>
+    <script>
+        hat.generateTeamScoutingReport(playerArray);
+    </script>
+</body>
+
+</html>
