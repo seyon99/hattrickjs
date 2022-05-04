@@ -1,6 +1,6 @@
 # Hattrick.js
 
-### Deployed link to documentation
+### Library Demo
 https://hattrickjs.herokuapp.com/
 
 ### Getting Started
